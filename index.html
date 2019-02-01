@@ -1,0 +1,53 @@
+<style>
+    #content {
+        display: flex;
+    }
+
+    #content > .parent {
+        color: black;
+    }
+
+    .parent {
+        margin-left: 10px;
+        font-weight: bold;
+        font-family: sans-serif;
+        margin-top: 3px;
+        font-size: 14px;
+    }
+
+    .parent .parent .parent {
+        margin-left: 16px;
+    }
+
+    .parent .parent .parent .parent {
+        margin-left: 32px;
+    }
+
+    strong {
+        font-size: 14px;
+    }
+
+    .node {
+        font-size: 15px;
+        margin-left: 15px;
+        margin-top: 5px;
+        font-weight: normal;
+    }
+
+    .ok {
+        color: green;
+    }
+
+    .partial {
+        color: yellow;
+    }
+
+    .nok {
+        color: red;
+    }
+</style>
+
+<div id="total"></div>
+<div id="content"></div>
+
+<script src="./i18n-helper.js"></script>
