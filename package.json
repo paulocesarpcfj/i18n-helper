@@ -11,9 +11,6 @@
   "author": "Paulo Ferreira",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
     "concurrently": "^4.1.0",
     "http-server": "^0.11.1",
     "rollup": "^1.1.2"

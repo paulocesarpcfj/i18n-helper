@@ -2872,13 +2872,13 @@
             return arrElement.map(el => document.querySelector(`#${el.id}`).className = `${type} ok`);
         } else if (arrElement.length % 4 !== 0) {
             return arrElement.map(el => document.querySelector(`#${el.id}`).className = `${type} partial`);
-        } else {
-            return arrElement.map(el => document.querySelector(`#${el.id}`).className = `${type} nok`);
         }
+
+        return arrElement.map(el => document.querySelector(`#${el.id}`).className = `${type} nok`);
     };
 
-    const renderLevel = (nodes, element) => {
-        return Object.keys(nodes).map((content, key) => {
+    const renderLevel = (nodes, element) => (
+        Object.keys(nodes).map((content, key) => {
             if (nodes[content] && typeof nodes[content] === 'object') {
                 element.innerHTML += `
                 <div
@@ -2886,26 +2886,27 @@
                     class="parent"
                     id="${element.id}-${content}-${key}"
                 >
-                    <strong>${content}:</strong> 
+                    <strong>${content}:</strong>
                 </div>
             `;
 
                 verifyTextIntegrity(content, 'parent');
-                return renderLevel(nodes[content], document.getElementById(`${element.id}-${content}-${key}`))
-            } else {
-                element.innerHTML += `
-                <div
-                    data-text="${content}"
-                    class="node"
-                    id="${element.id}-${content}-${key}"
-                >
-                    <strong>${content}:</strong> ${nodes[content]}
-                </div>
-            `;
-                verifyTextIntegrity(content, 'node');
+                return renderLevel(nodes[content], document.getElementById(`${element.id}-${content}-${key}`));
             }
-        });
-    };
+
+            element.innerHTML += `
+            <div
+                data-text="${content}"
+                class="node"
+                id="${element.id}-${content}-${key}"
+            >
+                <strong>${content}:</strong> ${nodes[content]}
+            </div>
+        `;
+
+            return verifyTextIntegrity(content, 'node');
+        })
+    );
 
     const contentWrapper = document.getElementById('content');
     renderLevel(translations, contentWrapper);
