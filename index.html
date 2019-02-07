@@ -1,10 +1,22 @@
 <style>
-    #content {
+    body {
+        font-family: sans-serif;
+    }
+
+    #content, #filteredWrapper {
         display: flex;
+        justify-content: space-between;
     }
 
     #content > .parent {
         color: black;
+    }
+
+    #content > div, #filteredWrapper > div {
+        border-right: 1px solid #f2f2f2;
+        margin-right: 10px;
+        width: 100%;
+        min-height: 400px;
     }
 
     .parent {
@@ -45,9 +57,76 @@
     .nok {
         color: red;
     }
+
+    #content.hidden, #filteredWrapper.hidden {
+        display: none;
+    }
+
+    .disabled {
+        pointer-events: none;
+    }
+
+    .filter {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+        align-items: center;
+    }
+
+    button {
+        background: #3c3c3c;
+        color: white;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: all .2s ease-in-out;
+    }
+
+    button:hover {
+        transition: all .2s ease-in-out;
+        background: white;
+        color: #3c3c3c;
+    }
+
+    button.active {
+        cursor: default;
+        pointer-events: none;
+        transition: all .2s ease-in-out;
+        background: white;
+        color: #3c3c3c;
+    }
 </style>
 
-<div id="total"></div>
+<div class="filter">
+    Filter by:
+    <div>
+        <button id="filterByNOK">Not Translated</button>
+        <button id="filterByPartial">Partial Translated</button>
+
+        <button id="clearFilter">Clear Filters</button>
+    </div>
+</div>
+<div id="filteredWrapper" class="hidden">
+    <div data-filtered-text="en-US">
+        <strong>Filtered en-US: <span class="filteredCount"></span></strong>
+        <div id="en-filter"></div>
+    </div>
+    <div data-filtered-text="pt-BR">
+        <strong>Filtered pt-BR: <span class="filteredCount"></span></strong>
+        <div id="pt-filter"></div>
+    </div>
+    <div data-filtered-text="es-ES">
+        <strong>Filtered es-ES: <span class="filteredCount"></span></strong>
+        <div id="es-filter"></div>
+    </div>
+    <div data-filtered-text="de-DE">
+        <strong>Filtered de-DE: <span class="filteredCount"></span></strong>
+        <div id="de-filter"></div>
+    </div>
+</div>
 <div id="content"></div>
 
 <script src="./i18n-helper.js"></script>
